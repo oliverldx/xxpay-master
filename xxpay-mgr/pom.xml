@@ -18,6 +18,8 @@
 		<mybatis.spring.version>1.3.0</mybatis.spring.version>
 		<mybatis.generator.version>1.3.2</mybatis.generator.version>
 		<fastjson.version>1.2.7</fastjson.version>
+		<docker.host>http://127.0.0.1:2375</docker.host>
+		<docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
 	</properties>
 
 	<parent>
@@ -63,6 +65,34 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<finalName>${project.name}</finalName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.maven.plugin.version}</version>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>xxpay/${project.artifactId}:${project.version}</imageName>
+					<dockerHost>${docker.host}</dockerHost>
+					<baseImage>paperinik/rpi-java8</baseImage>
+					<entryPoint>["java", "-jar","-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]
+					</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
 				</configuration>
 			</plugin>
 		</plugins>
