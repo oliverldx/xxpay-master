@@ -256,10 +256,11 @@
                                 form.render();
                                 form.on('submit(edit)', function(data) {
                                     //这里可以写ajax方法提交表单
+									// alert(JSON.stringify(data.field));
                                     $.ajax({
                                         type: "POST",
                                         url: "/pay_channel/save",
-                                        data: "params=" + JSON.stringify(data.field),
+                                        data: {"params" :JSON.stringify(data.field)},
                                         success: function(msg){
                                             if(msg == 1) {
                                                 layerTips.msg('保存成功');

@@ -17,6 +17,7 @@ import org.xxpay.dal.dao.model.PayChannel;
 import org.xxpay.dal.dao.plugin.PageModel;
 import org.xxpay.mgr.service.PayChannelService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -68,7 +69,7 @@ public class PayChannelController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public String save(@RequestParam String params) {
+    public String save(HttpServletRequest request, String params) {
         JSONObject po = JSONObject.parseObject(params);
         String channelId = po.getString("channelId");
         String param = po.getString("param");

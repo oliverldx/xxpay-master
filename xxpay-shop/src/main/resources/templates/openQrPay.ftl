@@ -80,7 +80,7 @@
         }
         $("#vAmt").text(vAmt+'元');
         //var qrText = 'http://xxpay-shop.ngrok.cc/goods/qrPay/' + (vAmt*100);
-        var qrText = 'http://shop.xxpay.org/goods/qrPay.html?amount=' + (vAmt*100);
+        var qrText = 'http://192.168.1.51:8081/goods/qrPay.html?amount=' + (vAmt*100);
         qrcode.makeCode(qrText);
     }
 

@@ -39,9 +39,11 @@ public class GoodsOrderController {
 
     static final String mchId = "20001223";
     // 加签key
-    static final String reqKey = "M86l522AV6q613Ii4W6u8K48uW8vM1N6bFgyv769220MdYe9u37N4y7rI5mQ";
+//    static final String reqKey = "M86l522AV6q613Ii4W6u8K48uW8vM1N6bFgyv769220MdYe9u37N4y7rI5mQ";
+    static final String reqKey = "123456";
     // 验签key
-    static final String resKey = "Hpcl522AV6q613KIi46u6g6XuW8vM1N8bFgyv769770MdYe9u37M4y7rIpl8";
+//    static final String resKey = "Hpcl522AV6q613KIi46u6g6XuW8vM1N8bFgyv769770MdYe9u37M4y7rIpl8";
+    static final String resKey = "456789";
     //static final String baseUrl = "http://api.xxpay.org/api";
     static final String baseUrl = "http://127.0.0.1:3020/api";
     //static final String notifyUrl = "http://shop.xxpay.org/goods/payNotify";
@@ -151,7 +153,9 @@ public class GoodsOrderController {
         String reqData = "params=" + paramMap.toJSONString();
         System.out.println("请求支付中心下单接口,请求数据:" + reqData);
         String url = baseUrl + "/pay/create_order?";
-        String result = XXPayUtil.call4Post(url + reqData);
+        String urlParam = url + reqData;
+        _log.info("urlParam:{}", urlParam);
+        String result = XXPayUtil.call4Post(urlParam);
         System.out.println("请求支付中心下单接口,响应数据:" + result);
         Map retMap = JSON.parseObject(result);
         if("SUCCESS".equals(retMap.get("retCode"))) {
