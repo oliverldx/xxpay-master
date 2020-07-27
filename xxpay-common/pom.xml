@@ -61,16 +61,6 @@
 
 	<build>
 		<finalName>xxpay-common</finalName>
-		<plugins>   
-	    	 <plugin>
-						<artifactId>maven-compiler-plugin</artifactId>   
-                        <version>3.1</version>
-                        <configuration>   
-                           <source>10</source>
-                           <target>10</target>   
-                        </configuration>   
-             </plugin> 
-        </plugins> 
 	</build>
 
 </project>
