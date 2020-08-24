@@ -136,8 +136,16 @@ public class PayOrderServiceImpl extends BaseService implements IPayOrderService
             _log.warn("新增支付订单失败, {}. jsonParam={}", RetEnum.RET_PARAM_INVALID.getMessage(), jsonParam);
             return RpcUtil.createFailResult(baseParam, RetEnum.RET_PARAM_INVALID);
         }
-        int result = super.baseCreatePayOrder(payOrder);
-        return RpcUtil.createBizResult(baseParam, result);
+        PayOrder payOrderDb = super.baseSelectPayOrderByMchIdAndPayOrderId(payOrder.getMchId(),payOrder.getPayOrderId());
+        if(payOrderDb == null) {
+            int result = super.baseCreatePayOrder(payOrder);
+            return RpcUtil.createBizResult(baseParam, result);
+        }else if(payOrderDb.getStatus().equals(PayConstant.PAY_STATUS_SUCCESS)){
+            return RpcUtil.createFailResult(baseParam, RetEnum.RET_BIZ_PAY_ALREADY);
+        }else {
+            return RpcUtil.createBizResult(baseParam, 0);
+        }
+
     }
 
     @Override

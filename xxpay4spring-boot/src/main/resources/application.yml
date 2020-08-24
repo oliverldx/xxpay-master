@@ -47,8 +47,8 @@ spring:
 
 config:
   ali:
-    notify_url: http://api.xxpay.org/notify/pay/aliPayNotifyRes.htm
-    return_url: http://www.xxpay.org
+    notify_url: http://192.168.1.51:8091/notify/pay/aliPayNotifyRes.htm
+    return_url: http://192.168.1.249/
   wx:
     certRootPath: /home/xxpay/service/cert
     notifyUrl: http://api.xxpay.org/notify/pay/wxPayNotifyRes.htm

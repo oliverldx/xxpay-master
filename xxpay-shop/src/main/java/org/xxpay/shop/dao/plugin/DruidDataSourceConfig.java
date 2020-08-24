@@ -6,7 +6,10 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.boot.context.properties.bind.Binder;
+import org.springframework.boot.context.properties.source.ConfigurationPropertySource;
+import org.springframework.boot.context.properties.source.ConfigurationPropertySources;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -31,17 +34,20 @@ import java.util.Properties;
 public class DruidDataSourceConfig implements EnvironmentAware {
 
     private Environment environment;
-    private RelaxedPropertyResolver propertyResolver;
+    private Properties properties;
 
     public void setEnvironment(Environment environment) {
         this.environment = environment;
-        this.propertyResolver = new RelaxedPropertyResolver(environment, "spring.datasource.");
+        Iterable<ConfigurationPropertySource> sources = ConfigurationPropertySources.get(environment);
+        Binder binder = new Binder(sources);
+        BindResult<Properties> bindResult = binder.bind("spring.datasource", Properties.class);
+        this.properties = bindResult.get();
     }
 
     //注册dataSource
     @Bean(initMethod = "init", destroyMethod = "close")
     public DruidDataSource dataSource() throws SQLException {
-        if (StringUtils.isEmpty(propertyResolver.getProperty("url"))) {
+        if (StringUtils.isEmpty(properties.getProperty("url"))) {
             System.out.println("Your database connection pool configuration is incorrect!"
                     + " Please check your Spring profile, current profiles are:"
                     + Arrays.toString(environment.getActiveProfiles()));
@@ -49,23 +55,23 @@ public class DruidDataSourceConfig implements EnvironmentAware {
                     "Database connection pool is not configured correctly");
         }
         DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setDriverClassName(propertyResolver.getProperty("driver-class-name"));
-        druidDataSource.setUrl(propertyResolver.getProperty("url"));
-        druidDataSource.setUsername(propertyResolver.getProperty("username"));
-        druidDataSource.setPassword(propertyResolver.getProperty("password"));
-        druidDataSource.setInitialSize(Integer.parseInt(propertyResolver.getProperty("initialSize")));
-        druidDataSource.setMinIdle(Integer.parseInt(propertyResolver.getProperty("minIdle")));
-        druidDataSource.setMaxActive(Integer.parseInt(propertyResolver.getProperty("maxActive")));
-        druidDataSource.setMaxWait(Integer.parseInt(propertyResolver.getProperty("maxWait")));
-        druidDataSource.setTimeBetweenEvictionRunsMillis(Long.parseLong(propertyResolver.getProperty("timeBetweenEvictionRunsMillis")));
-        druidDataSource.setMinEvictableIdleTimeMillis(Long.parseLong(propertyResolver.getProperty("minEvictableIdleTimeMillis")));
-        druidDataSource.setValidationQuery(propertyResolver.getProperty("validationQuery"));
-        druidDataSource.setTestWhileIdle(Boolean.parseBoolean(propertyResolver.getProperty("testWhileIdle")));
-        druidDataSource.setTestOnBorrow(Boolean.parseBoolean(propertyResolver.getProperty("testOnBorrow")));
-        druidDataSource.setTestOnReturn(Boolean.parseBoolean(propertyResolver.getProperty("testOnReturn")));
-        druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(propertyResolver.getProperty("poolPreparedStatements")));
-        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(Integer.parseInt(propertyResolver.getProperty("maxPoolPreparedStatementPerConnectionSize")));
-        druidDataSource.setFilters(propertyResolver.getProperty("filters"));
+        druidDataSource.setDriverClassName(properties.getProperty("driver-class-name"));
+        druidDataSource.setUrl(properties.getProperty("url"));
+        druidDataSource.setUsername(properties.getProperty("username"));
+        druidDataSource.setPassword(properties.getProperty("password"));
+        druidDataSource.setInitialSize(Integer.parseInt(properties.getProperty("initialSize")));
+        druidDataSource.setMinIdle(Integer.parseInt(properties.getProperty("minIdle")));
+        druidDataSource.setMaxActive(Integer.parseInt(properties.getProperty("maxActive")));
+        druidDataSource.setMaxWait(Integer.parseInt(properties.getProperty("maxWait")));
+        druidDataSource.setTimeBetweenEvictionRunsMillis(Long.parseLong(properties.getProperty("timeBetweenEvictionRunsMillis")));
+        druidDataSource.setMinEvictableIdleTimeMillis(Long.parseLong(properties.getProperty("minEvictableIdleTimeMillis")));
+        druidDataSource.setValidationQuery(properties.getProperty("validationQuery"));
+        druidDataSource.setTestWhileIdle(Boolean.parseBoolean(properties.getProperty("testWhileIdle")));
+        druidDataSource.setTestOnBorrow(Boolean.parseBoolean(properties.getProperty("testOnBorrow")));
+        druidDataSource.setTestOnReturn(Boolean.parseBoolean(properties.getProperty("testOnReturn")));
+        druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(properties.getProperty("poolPreparedStatements")));
+        druidDataSource.setMaxPoolPreparedStatementPerConnectionSize(Integer.parseInt(properties.getProperty("maxPoolPreparedStatementPerConnectionSize")));
+        druidDataSource.setFilters(properties.getProperty("filters"));
         return druidDataSource;
     }
 

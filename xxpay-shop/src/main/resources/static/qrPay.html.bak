@@ -22,16 +22,16 @@
     <table>
         <tr>
             <td>购买商品</td>
-            <td class="fr">XXPAY捐助商品G_0001</td>
+            <td class="fr">欧普斯捐助商品G_0001</td>
         </tr>
         <tr>
             <td>收款方</td>
-            <td class="fr">北京骏易科技有限公司</td>
+            <td class="fr">欧普斯数字化科技有限公司</td>
         </tr>
     </table>
 </div>
 <form name="punchout_form" method="post" action="https://openapi.alipay.com/gateway.do?charset=UTF-8&method=alipay.trade.wap.pay&sign=gj%2BefL%2FqdL%2FWwwK1yC7%2FKYJcZkLM%2Bc%2FgzqIbxzvUY%2BqyllDrmAztMCOi%2F6q5P1EY%2BhIdEBP8M5NhsF881%2F%2FpUvg7gfabmXrA4iLO8cy1oWV7QsVwJt7qB%2BT%2Fs4c8KdvsMHbD8FB4CPC2reF7BlNaifWiPpEE80%2BeFuEl6kF4bWAvbD8NwM7SzGGP94of4JmEa7tH%2FtXBJCx7MyryGvz2SrMoe%2BvJ7p%2B7V%2F9dUTf8LM5L%2BaYAkLaanU41qaqX12Ef44P6HhTo1Z%2FvjZ9eETAlUhDJ8RrZwHL9S7KLfuMoXimYlNqbc4c6VhbfGtxeZtVugrCGk69lCcENjdqwNNhN1g%3D%3D&return_url=http%3A%2F%2Fwww.xxpay.org&notify_url=http%3A%2F%2Fapi.xxpay.org%2Fnotify%2Fpay%2FaliPayNotifyRes.htm&version=1.0&app_id=2018101961681966&sign_type=RSA2&timestamp=2020-07-10+13%3A22%3A31&alipay_sdk=alipay-sdk-java-dynamicVersionNo&format=json">
-    <input type="hidden" name="biz_content" value="{&quot;body&quot;:&quot;XXPAY捐助商品G_0001&quot;,&quot;out_trade_no&quot;:&quot;P0020200710132231006948&quot;,&quot;product_code&quot;:&quot;QUICK_WAP_PAY&quot;,&quot;subject&quot;:&quot;XXPAY捐助商品G_0001&quot;,&quot;total_amount&quot;:&quot;0.01&quot;}">
+    <input type="hidden" name="biz_content" value="{&quot;body&quot;:&quot;欧普斯捐助商品G_0001&quot;,&quot;out_trade_no&quot;:&quot;P0020200710132231006948&quot;,&quot;product_code&quot;:&quot;QUICK_WAP_PAY&quot;,&quot;subject&quot;:&quot;欧普斯捐助商品G_0001&quot;,&quot;total_amount&quot;:&quot;0.01&quot;}">
     <input type="submit" value="立即支付" style="display:none" >
 </form>
 <script>document.forms[0].submit();</script>
