@@ -171,7 +171,7 @@
 						<imageName>xxpay/${project.artifactId}:${project.version}</imageName>
 						<dockerHost>${docker.host}</dockerHost>
 						<baseImage>paperinik/rpi-java8</baseImage>
-						<entryPoint>["java", "-jar","-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]
+						<entryPoint>["java", "-jar"," -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=56m -Xms128m -Xmx128m -Xmn32m -Xss256k -XX:SurvivorRatio=8 -XX:+UseConcMarkSweepGC ","-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]
 						</entryPoint>
 						<resources>
 							<resource>
