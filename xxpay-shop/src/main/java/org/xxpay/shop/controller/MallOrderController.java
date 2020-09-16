@@ -48,7 +48,7 @@ public class MallOrderController {
 //    static final String baseUrl = "http://127.0.0.1:3020/api";
     static final String baseUrl = "http://192.168.1.249:3020/api";
     //static final String notifyUrl = "http://shop.xxpay.org/goods/payNotify";
-    static final String notifyUrl = "http://127.0.0.1:8081/goods/payNotify";
+    static final String notifyUrl = "http://192.168.1.249:8091/goods/payNotify";
     private AtomicLong seq = new AtomicLong(0L);
     private final static String QR_PAY_URL = "http://shop.xxpay.org/goods/qrPay.html";
     static final String AppID = "wx077cb62e341f8a5c";
