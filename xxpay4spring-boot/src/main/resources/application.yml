@@ -47,11 +47,11 @@ spring:
 
 config:
   ali:
-    notify_url: http://pay-api.mall.huozaigz.com/notify/pay/aliPayNotifyRes.htm
-    return_url: http://portal-web.mall.huozaigz.com/
+    notify_url: https://pay-api.mall.huozaigz.com/notify/pay/aliPayNotifyRes.htm
+    return_url: https://portal-web.mall.huozaigz.com/
   wx:
     certRootPath: /home/xxpay/service/cert
-    notifyUrl: http://pay-api.mall.huozaigz.com/notify/pay/wxPayNotifyRes.htm
+    notifyUrl: https://pay-api.mall.huozaigz.com/notify/pay/wxPayNotifyRes.htm
 
 logging:
   file: ./log/xxpay4spring-boot.log
