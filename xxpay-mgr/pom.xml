@@ -20,12 +20,13 @@
 		<fastjson.version>1.2.7</fastjson.version>
 		<docker.host>http://192.168.1.249:2375</docker.host>
 		<docker.maven.plugin.version>1.2.2</docker.maven.plugin.version>
+		<arthas.version>3.4.3</arthas.version>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.6.RELEASE</version>
+		<version>2.3.4.RELEASE</version>
 	</parent>
 
 	<dependencies>
@@ -55,6 +56,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+		<dependency>
+			<groupId>com.taobao.arthas</groupId>
+			<artifactId>arthas-spring-boot-starter</artifactId>
+			<version>${arthas.version}</version>
 		</dependency>
 	</dependencies>
 
